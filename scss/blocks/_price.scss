@@ -1,0 +1,203 @@
+.price {
+	padding-top: 48px;
+	padding-bottom: 73px;
+}
+
+/* Слайдер включается только на узких экранах, стили нужны
+   чтобы флекс не сплющивал карточки */
+.mySwiper {
+	overflow: hidden;
+}
+
+.mySwiper .swiper-wrapper {
+	display: flex;
+	box-sizing: content-box;
+}
+
+.mySwiper .swiper-slide {
+	flex-shrink: 0;
+}
+
+.price__wrapper {
+	text-align: center;
+}
+
+.price__title {
+	padding: 24px 15px 70px 15px;
+}
+
+.price__cards {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* Плавная смена градиента при выборе тарифа: регистрируем
+   цвета как свойства, чтобы браузер умел их интерполировать */
+@property --gc-from {
+	syntax: '<color>';
+	inherits: false;
+	initial-value: #fbdacf;
+}
+
+@property --gc-to {
+	syntax: '<color>';
+	inherits: false;
+	initial-value: #fbdacf;
+}
+
+.price__card {
+	border-radius: 20px;
+	background: linear-gradient(
+		180deg,
+		var(--gc-from) 0%,
+		var(--gc-to) 100%
+	);
+	box-shadow: 0px 20px 50px 0px rgba(132, 148, 205, 0.08);
+
+	text-align: start;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+
+	padding: 46px;
+	width: 360px;
+
+	transition:
+		--gc-from 300ms ease,
+		--gc-to 300ms ease,
+		transform 200ms var(--ease-out),
+		box-shadow 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.price__card:not(.active):hover {
+		transform: translateY(-4px);
+		box-shadow: 0px 24px 54px 0px rgba(132, 148, 205, 0.16);
+	}
+}
+
+@media (max-width: 540px) {
+	.price__card {
+		padding: 32px 28px;
+	}
+
+	.price__card-text {
+		padding-top: 24px;
+		padding-bottom: 32px;
+	}
+
+	.price__card-list {
+		gap: 14px;
+		padding-bottom: 32px;
+	}
+
+	.active.price__card {
+		padding: 36px 28px 48px 28px;
+	}
+}
+
+.price__card-text {
+	padding-top: 33px;
+	padding-bottom: 50px;
+	color: #eb8382;
+	font-size: clamp(0.813rem, 0.699rem + 0.57vw, 1.125rem); // 18 - 13
+	font-style: normal;
+	font-weight: 700;
+	line-height: 8px; /* 0% */
+
+	.dollar {
+		font-size: clamp(
+			1.375rem,
+			1.261rem + 0.57vw,
+			1.688rem
+		); // 27 - 22
+		font-style: normal;
+		font-weight: 700;
+		line-height: normal;
+	}
+
+	.number {
+		font-size: clamp(2.188rem, 1.847rem + 1.7vw, 3.125rem); // 50 - 35
+		font-style: normal;
+		font-weight: 700;
+		line-height: normal;
+	}
+}
+
+.price__card-title {
+	transition: color 300ms ease;
+}
+
+.price__card-list {
+	padding-bottom: 50px;
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+
+	transition: color 300ms ease;
+}
+
+.price__card-item {
+	position: relative;
+	padding-left: 27px;
+}
+
+.price__card-item::before {
+	position: absolute;
+	content: '';
+	background: url(./../img/vector.svg) center / contain no-repeat;
+	width: 16px;
+	height: 12px;
+	top: 6px;
+	left: 0px;
+}
+
+.price__button {
+	width: 100%;
+	z-index: 1;
+}
+
+.active.price__card-title {
+	color: #fff;
+}
+.active.price__card-list {
+	color: #fff;
+}
+.active.price__card-item::before {
+	background-image: url(./../img/vectorFFF.svg);
+}
+
+.active.price__card {
+	--gc-from: #446381;
+	--gc-to: #826f8c;
+
+	position: relative;
+	padding: 51px 46px 65px 46px;
+}
+
+@media (max-width: 540px) {
+	.active.price__card {
+		padding: 36px 28px 48px 28px;
+	}
+}
+.active.price__card::after {
+	position: absolute;
+	content: '';
+	background: url(./../img/badge.png);
+	background-size: cover;
+	width: 45px;
+	height: 45px;
+	top: 23px;
+	right: 23px;
+}
+.active.price__card::before {
+	position: absolute;
+	content: '';
+	background: url(./../img/price/union.png);
+	width: 190px;
+	height: 150px;
+	bottom: 0px;
+	left: 0px;
+	z-index: -1;
+}

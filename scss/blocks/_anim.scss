@@ -1,0 +1,356 @@
+/* Ховер кнопок: без движения, чтобы кнопка не уезжала
+   из-под курсора при клике */
+.button {
+	transition:
+		filter 150ms ease,
+		transform 100ms ease;
+}
+
+.button:hover {
+	filter: brightness(1.08);
+}
+
+.button:active {
+	transform: scale(0.97);
+}
+
+.header__description::after {
+	transform: translate(-50%, -50%) rotate(45deg); /* Здесь происходит начальное вращение */
+	animation: rotateAnimation 7s linear infinite; /* Добавляем анимацию вращения */
+}
+
+@keyframes rotateAnimation {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg); /* В начале анимации угол вращения 0 градусов */
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg); /* В конце анимации угол вращения 360 градусов */
+	}
+}
+
+.header::before {
+	-webkit-animation: pulsate-bck 3s
+		cubic-bezier(0.47, 0, 0.745, 0.715) infinite alternate-reverse
+		forwards;
+	animation: pulsate-bck 1.2s cubic-bezier(0.47, 0, 0.745, 0.715)
+		infinite alternate-reverse forwards;
+}
+
+@-webkit-keyframes pulsate-bck {
+	0% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(0.9);
+		transform: scale(0.9);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+@keyframes pulsate-bck {
+	0% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	50% {
+		-webkit-transform: scale(0.9);
+		transform: scale(0.9);
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+.header__content::after {
+	-webkit-animation: vibrate-1 2s linear infinite both;
+	animation: vibrate-1 2s linear infinite both;
+}
+
+.aboutPC__img::after {
+	-webkit-animation: vibrate-1 2s linear infinite both;
+	animation: vibrate-1 2s linear infinite both;
+}
+
+@-webkit-keyframes vibrate-1 {
+	0% {
+		-webkit-transform: translate(0);
+		transform: translate(0);
+	}
+	20% {
+		-webkit-transform: translate(-2px, 2px);
+		transform: translate(-2px, 2px);
+	}
+	40% {
+		-webkit-transform: translate(-2px, -2px);
+		transform: translate(-2px, -2px);
+	}
+	60% {
+		-webkit-transform: translate(2px, 2px);
+		transform: translate(2px, 2px);
+	}
+	80% {
+		-webkit-transform: translate(2px, -2px);
+		transform: translate(2px, -2px);
+	}
+	100% {
+		-webkit-transform: translate(0);
+		transform: translate(0);
+	}
+}
+@keyframes vibrate-1 {
+	0% {
+		-webkit-transform: translate(0);
+		transform: translate(0);
+	}
+	20% {
+		-webkit-transform: translate(-2px, 2px);
+		transform: translate(-2px, 2px);
+	}
+	40% {
+		-webkit-transform: translate(-2px, -2px);
+		transform: translate(-2px, -2px);
+	}
+	60% {
+		-webkit-transform: translate(2px, 2px);
+		transform: translate(2px, 2px);
+	}
+	80% {
+		-webkit-transform: translate(2px, -2px);
+		transform: translate(2px, -2px);
+	}
+	100% {
+		-webkit-transform: translate(0);
+		transform: translate(0);
+	}
+}
+
+.position-vr {
+	-webkit-animation: bounce-in-top 1.2s both;
+	animation: bounce-in-top 1.31s both;
+}
+
+.position-controller {
+	-webkit-animation: bounce-in-top 1.1s both;
+	animation: bounce-in-top 1.1s both;
+}
+
+@-webkit-keyframes bounce-in-top {
+	0% {
+		-webkit-transform: translateY(-500px);
+		transform: translateY(-500px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+		opacity: 0;
+	}
+	38% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+		opacity: 1;
+	}
+	55% {
+		-webkit-transform: translateY(-65px);
+		transform: translateY(-65px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	72% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+	}
+	81% {
+		-webkit-transform: translateY(-28px);
+		transform: translateY(-28px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	90% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+	}
+	95% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+	}
+}
+@keyframes bounce-in-top {
+	0% {
+		-webkit-transform: translateY(-500px);
+		transform: translateY(-500px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+		opacity: 0;
+	}
+	38% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+		opacity: 1;
+	}
+	55% {
+		-webkit-transform: translateY(-65px);
+		transform: translateY(-65px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	72% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+	}
+	81% {
+		-webkit-transform: translateY(-28px);
+		transform: translateY(-28px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	90% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+	}
+	95% {
+		-webkit-transform: translateY(-8px);
+		transform: translateY(-8px);
+		-webkit-animation-timing-function: ease-in;
+		animation-timing-function: ease-in;
+	}
+	100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-animation-timing-function: ease-out;
+		animation-timing-function: ease-out;
+	}
+}
+
+/* Входная анимация для изначально выбранной карточки, при
+   переключении тарифов не повторяется */
+.price__card--intro {
+	-webkit-animation: swing-in-bottom-fwd 1.2s
+		cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+	animation: swing-in-bottom-fwd 1.2s
+		cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@-webkit-keyframes swing-in-bottom-fwd {
+	0% {
+		-webkit-transform: rotateX(100deg);
+		transform: rotateX(100deg);
+		-webkit-transform-origin: bottom;
+		transform-origin: bottom;
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: rotateX(0);
+		transform: rotateX(0);
+		-webkit-transform-origin: bottom;
+		transform-origin: bottom;
+		opacity: 1;
+	}
+}
+@keyframes swing-in-bottom-fwd {
+	0% {
+		-webkit-transform: rotateX(100deg);
+		transform: rotateX(100deg);
+		-webkit-transform-origin: bottom;
+		transform-origin: bottom;
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: rotateX(0);
+		transform: rotateX(0);
+		-webkit-transform-origin: bottom;
+		transform-origin: bottom;
+		opacity: 1;
+	}
+}
+
+/* Уважаем настройку «уменьшить движение»: постоянные декорации
+   останавливаем, входные оставляем только прозрачностью */
+@media (prefers-reduced-motion: reduce) {
+	.header__description::after,
+	.header::before,
+	.header__content::after,
+	.aboutPC__img::after,
+	.header__decor,
+	.aboutVR-img,
+	.aboutPC__img,
+	.price__card--intro {
+		animation: none;
+	}
+}
+/* Иллюстрации медленно покачиваются: живость без суеты */
+.header__decor,
+.aboutVR-img,
+.aboutPC__img {
+	animation: float 4s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+	from {
+		transform: translateY(0);
+	}
+
+	to {
+		transform: translateY(-8px);
+	}
+}
+
+/* Появление блоков при прокрутке, классы добавляет js */
+.reveal {
+	opacity: 0;
+	transform: translateY(24px);
+
+	transition:
+		opacity 0.4s var(--ease-out),
+		transform 0.4s var(--ease-out);
+}
+
+.reveal.revealed {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.reveal--delay {
+	transition-delay: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+}
+
+/* На узких экранах крупные иллюстрации занимают не больше
+   трех четвертей ширины и не растягиваются сильнее 420px */
+@media (max-width: 999px) {
+	.header__decor-img,
+	.aboutVR-img,
+	.aboutPC__img {
+		display: block;
+		width: min(75%, 420px);
+		margin-inline: auto;
+	}
+}

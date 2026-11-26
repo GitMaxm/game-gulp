@@ -1,0 +1,23 @@
+:root {
+	--container-width: 1200px;
+	--container-padding: 15px;
+
+	--font-main: 'Josefin Sans', sans-serif;
+	--font-accent: 'Playfair Display', serif;
+
+	--page-bg: #ffe6d7;
+	--text-color: #826f8c;
+	--accent: #446381;
+
+	--laptop-size: 1199px;
+	--tablet-size: 959px;
+	--mobile-size: 599px;
+
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.dark {
+	--page-bg: #252526;
+	--text-color: #fff;
+}

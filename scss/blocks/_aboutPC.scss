@@ -1,0 +1,68 @@
+.aboutPC {
+	padding-top: 89px;
+	padding-bottom: 100px;
+	position: relative;
+	background: url('./../img/aboutPC/bg.png');
+	background-repeat: no-repeat;
+	overflow: hidden;
+	background-size: cover;
+
+	@media (max-width: 768px) {
+		padding-top: 62px;
+		padding-bottom: 80px;
+	}
+}
+
+.aboutPC__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 76px;
+
+	@media (max-width: 990px) {
+		flex-direction: column;
+	}
+}
+
+.aboutPC__content {
+	&-title {
+		max-width: 590px;
+		padding-top: 30px;
+		padding-bottom: 24px;
+	}
+
+	&-text {
+		max-width: 520px;
+		padding-bottom: 30px;
+		position: relative;
+	}
+
+	&-text::after {
+		position: absolute;
+		content: '';
+		background: url('./../img/arrow-left.svg');
+		width: 32.759px;
+		height: 18.931px;
+		bottom: 16px;
+		left: 82%;
+	}
+}
+
+.aboutPC__img {
+	position: relative;
+}
+
+.aboutPC__img::after {
+	position: absolute;
+	content: '';
+	background: url('./../img/header/background/DOTS.svg') no-repeat;
+	width: 123px;
+	height: 109px;
+	z-index: -1;
+	right: -60px; /* Размещаем справа от &-title2 */
+	top: 50%;
+
+	// @media (max-width: 1250px) {
+	// 	display: none;
+	// }
+}

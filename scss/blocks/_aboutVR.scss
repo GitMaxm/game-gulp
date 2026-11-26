@@ -1,0 +1,74 @@
+.aboutVR {
+	padding-top: 89px;
+	padding-bottom: 100px;
+	position: relative;
+
+	@media (max-width: 768px) {
+		padding-top: 62px;
+		padding-bottom: 80px;
+	}
+}
+
+.aboutVR::after {
+	position: absolute;
+	content: '';
+	background: url('./../img/aboutVR/background/2.png') no-repeat;
+	width: 441px;
+	height: 710px;
+	right: 0;
+	bottom: 247px;
+	z-index: -1;
+
+	@media (max-width: 660px) {
+		bottom: 190px;
+
+		width: 441px;
+		height: 710px;
+	}
+}
+
+.aboutVR__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 76px;
+
+	@media (max-width: 990px) {
+		flex-direction: column;
+	}
+}
+
+.aboutVR__content {
+	&-title {
+		max-width: 590px;
+		padding-top: 30px;
+		padding-bottom: 24px;
+	}
+
+	&-text {
+		max-width: 520px;
+		padding-bottom: 30px;
+		position: relative;
+	}
+
+	&-text::after {
+		position: absolute;
+		content: '';
+		background: url('./../img/arrow-left.svg');
+		width: 32.759px;
+		height: 18.931px;
+		bottom: 7px;
+		left: 53%;
+	}
+}
+
+.aboutVR__content::after {
+	position: absolute;
+	content: '';
+	background: url('./../img/aboutVR/background/VR.png') no-repeat;
+	right: 163px;
+	bottom: 0;
+	width: 528px;
+	height: 293px;
+	z-index: -1;
+}

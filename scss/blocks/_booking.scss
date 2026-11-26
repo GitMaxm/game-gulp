@@ -1,0 +1,120 @@
+.booking {
+	padding-top: 96px;
+	padding-bottom: 96px;
+}
+
+.booking__wrapper {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 76px;
+	align-items: start;
+
+	@media (max-width: 990px) {
+		grid-template-columns: 1fr;
+		gap: 40px;
+	}
+}
+
+.booking__title {
+	padding: 16px 0 24px 0;
+}
+
+.booking__text {
+	max-width: 420px;
+}
+
+.booking__contacts {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding-top: 28px;
+}
+
+.booking__contact {
+	font-weight: 700;
+	color: var(--accent);
+
+	a {
+		color: inherit;
+		transition: color 150ms ease;
+	}
+
+	a:hover {
+		color: #eb8382;
+	}
+}
+
+.booking__panel {
+	background: #fff;
+	border: 1px solid rgba(68, 99, 129, 0.14);
+	border-radius: 20px;
+	box-shadow: 0px 20px 50px 0px rgba(132, 148, 205, 0.08);
+	padding: 40px;
+	width: 100%;
+	max-width: 520px;
+
+	@media (max-width: 540px) {
+		padding: 28px 24px;
+	}
+}
+
+.booking__plan {
+	color: var(--accent);
+	font-weight: 700;
+	padding-bottom: 20px;
+
+	span {
+		color: #eb8382;
+	}
+}
+
+.booking__form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.booking__field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+
+	span {
+		color: var(--accent);
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	input {
+		border: 1px solid rgba(68, 99, 129, 0.25);
+		border-radius: 10px;
+		background: #fff;
+		padding: 12px 16px;
+
+		color: var(--accent);
+		font-family: inherit;
+		font-size: 16px; /* 16px и больше: iOS не зумит поле при фокусе */
+		font-weight: 500;
+
+		&:focus {
+			border-color: #4499d9;
+			outline: none;
+		}
+	}
+}
+
+.booking__note {
+	color: var(--text-color);
+	font-size: 13px;
+	opacity: 0.75;
+}
+
+.booking__success {
+	background: rgba(68, 153, 217, 0.12);
+	border: 1px solid rgba(68, 153, 217, 0.4);
+	border-radius: 10px;
+	padding: 16px 20px;
+
+	color: var(--accent);
+	font-weight: 700;
+}

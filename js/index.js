@@ -2,39 +2,63 @@ const mobileNavButton = document.querySelector('.mobile-nav-btn');
 const mobileNav = document.querySelector('.mobile-nav');
 const navIcon = document.querySelector('.nav-icon');
 
-mobileNavButton.onclick = () => {
-	mobileNav.classList.toggle('mobile-nav--open');
-	navIcon.classList.toggle('nav-icon--active');
-	document.body.classList.toggle('no-scroll');
-};
+mobileNavButton.addEventListener('click', () => {
+	const isOpen = mobileNav.classList.toggle('mobile-nav--open');
+	navIcon.classList.toggle('nav-icon--active', isOpen);
+	document.body.classList.toggle('no-scroll', isOpen);
+	mobileNavButton.setAttribute('aria-expanded', String(isOpen));
+});
 
 document.querySelectorAll('.mobile-nav a').forEach((link) => {
 	link.addEventListener('click', () => {
 		mobileNav.classList.remove('mobile-nav--open');
 		navIcon.classList.remove('nav-icon--active');
 		document.body.classList.remove('no-scroll');
+		mobileNavButton.setAttribute('aria-expanded', 'false');
 	});
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+	const planLabel = document.querySelector('#booking-plan');
+
+	// Кнопка выбранной карточки ведёт на форму бронирования,
+	// остальные предлагают выбрать свой тариф
 	const setSelectedButton = (card) => {
 		const button = card.querySelector('.price__button');
 		if (!button) return;
 		if (card.classList.contains('active')) {
-			button.textContent = 'Selected';
+			button.textContent = 'Book Now';
+			button.href = '#booking';
 			button.classList.add('price__button--selected');
 		} else {
 			button.textContent = 'Select This Plan';
+			button.href = '#!';
 			button.classList.remove('price__button--selected');
 		}
 	};
 
+	const syncPlanLabel = (card) => {
+		if (!planLabel) return;
+		const plan = card
+			.querySelector('.price__card-title')
+			?.textContent.trim();
+		const price = card
+			.querySelector('.price__card-text .number')
+			?.textContent.trim();
+		planLabel.textContent = `${plan} — $${price} per hour`;
+	};
+
+	const currentCard = document.querySelector('.price__card.active');
+	if (currentCard) syncPlanLabel(currentCard);
+
 	document.querySelectorAll('.price__button').forEach((button) => {
 		button.addEventListener('click', (event) => {
-			event.preventDefault();
-
 			const card = button.closest('.price__card');
+			// Клик по кнопке уже выбранной карточки не перехватываем:
+			// она ведёт на форму бронирования
 			if (!card || card.classList.contains('active')) return;
+
+			event.preventDefault();
 
 			const previousCard = document.querySelector(
 				'.price__card.active',
@@ -69,10 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				.querySelector('.price__card-title')
 				?.classList.add('active');
 
-			// Кнопка выбранной карточки показывает состояние,
+			// Кнопка выбранной карточки показывает действие,
 			// остальные возвращаются к предложению выбора
 			if (previousCard) setSelectedButton(previousCard);
 			setSelectedButton(card);
+			syncPlanLabel(card);
 
 			// Выбранная карточка доезжает до центра: она всегда видна
 			// целиком, по краям остаются только неактивные соседи
@@ -81,6 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
 				pricingSlider.slideTo(slides.indexOf(card));
 			}
 		});
+	});
+
+	// Демо-форма: ничего не отправляет и не хранит, только
+	// показывает подтверждение
+	const bookingForm = document.querySelector('.booking__form');
+	const bookingSuccess = document.querySelector('.booking__success');
+
+	bookingForm?.addEventListener('submit', (event) => {
+		event.preventDefault();
+
+		if (!bookingForm.checkValidity()) {
+			bookingForm.reportValidity();
+			return;
+		}
+
+		bookingForm.hidden = true;
+		bookingSuccess.hidden = false;
 	});
 });
 
@@ -126,6 +168,7 @@ const revealTargets = [
 	'.aboutPC__img',
 	'.aboutPC__content',
 	'.price__wrapper',
+	'.booking__wrapper',
 	'.footer__wrapper',
 ];
 

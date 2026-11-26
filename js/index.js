@@ -17,12 +17,28 @@ document.querySelectorAll('.mobile-nav a').forEach((link) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+	const setSelectedButton = (card) => {
+		const button = card.querySelector('.price__button');
+		if (!button) return;
+		if (card.classList.contains('active')) {
+			button.textContent = 'Selected';
+			button.classList.add('price__button--selected');
+		} else {
+			button.textContent = 'Select This Plan';
+			button.classList.remove('price__button--selected');
+		}
+	};
+
 	document.querySelectorAll('.price__button').forEach((button) => {
 		button.addEventListener('click', (event) => {
 			event.preventDefault();
 
 			const card = button.closest('.price__card');
-			if (!card) return;
+			if (!card || card.classList.contains('active')) return;
+
+			const previousCard = document.querySelector(
+				'.price__card.active',
+			);
 
 			document
 				.querySelectorAll('.price__card')
@@ -52,6 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			card
 				.querySelector('.price__card-title')
 				?.classList.add('active');
+
+			// Кнопка выбранной карточки показывает состояние,
+			// остальные возвращаются к предложению выбора
+			if (previousCard) setSelectedButton(previousCard);
+			setSelectedButton(card);
+
+			// Выбранная карточка доезжает до центра: она всегда видна
+			// целиком, по краям остаются только неактивные соседи
+			if (pricingSlider) {
+				const slides = Array.from(card.parentElement.children);
+				pricingSlider.slideTo(slides.indexOf(card));
+			}
 		});
 	});
 });
@@ -68,7 +96,9 @@ const initPricingSlider = () => {
 		breakpoints: {
 			890: { slidesPerView: 3 },
 			540: { slidesPerView: 2 },
-			320: { slidesPerView: 1 },
+			// Чуть больше одного слайда: края соседних карточек с ценами
+			// остаются видны, не нужно держать цифры в памяти при свайпе
+			320: { slidesPerView: 1.25, spaceBetween: 20 },
 		},
 	});
 };

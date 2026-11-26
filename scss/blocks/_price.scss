@@ -4,9 +4,37 @@
 }
 
 /* Слайдер включается только на узких экранах, стили нужны
-   чтобы флекс не сплющивал карточки */
+   чтобы флекс не сплющивал карточки. На десктопе слайдера нет,
+   и тень карточек не обрезается контейнером */
 .mySwiper {
-	overflow: hidden;
+	overflow: visible;
+}
+
+@media (max-width: 1109px) {
+	.mySwiper {
+		overflow: hidden;
+		padding-top: 30px;
+		padding-bottom: 80px;
+		margin-top: -30px;
+		margin-bottom: -80px;
+
+		/* Соседние карточки растворяются к краям экрана
+		   вместо жёсткого среза обрезкой */
+		-webkit-mask-image: linear-gradient(
+			to right,
+			transparent 0,
+			#000 28px,
+			#000 calc(100% - 28px),
+			transparent 100%
+		);
+		mask-image: linear-gradient(
+			to right,
+			transparent 0,
+			#000 28px,
+			#000 calc(100% - 28px),
+			transparent 100%
+		);
+	}
 }
 
 .mySwiper .swiper-wrapper {
@@ -55,6 +83,9 @@
 	);
 	box-shadow: 0px 20px 50px 0px rgba(132, 148, 205, 0.08);
 
+	/* Тонкая граница выделяет неактивные карточки на светлом фоне */
+	border: 1px solid rgba(68, 99, 129, 0.14);
+
 	text-align: start;
 	display: flex;
 	align-items: flex-start;
@@ -70,6 +101,10 @@
 		box-shadow 200ms var(--ease-out);
 }
 
+.active.price__card {
+	border-color: transparent;
+}
+
 @media (hover: hover) and (pointer: fine) {
 	.price__card:not(.active):hover {
 		transform: translateY(-4px);
@@ -78,33 +113,55 @@
 }
 
 @media (max-width: 540px) {
+	/* Заголовок компактнее, чтобы карточка и кнопка не уезжали за фолд */
+	.price__title {
+		padding: 16px 0 36px;
+		font-size: clamp(2rem, 1.6rem + 2vw, 2.125rem); // 34 - 32
+		line-height: 1.2;
+	}
+
 	.price__card {
-		padding: 32px 28px;
+		padding: 28px 24px;
+	}
+
+	.button {
+		padding: 13px 24px;
+	}
+
+	.price__card-title {
+		font-size: 26px;
+		line-height: 1.2;
 	}
 
 	.price__card-text {
-		padding-top: 24px;
-		padding-bottom: 32px;
+		padding-top: 18px;
+		padding-bottom: 24px;
 	}
 
 	.price__card-list {
-		gap: 14px;
-		padding-bottom: 32px;
+		gap: 10px;
+		padding-bottom: 24px;
+	}
+
+	.price__card-item {
+		padding-left: 26px;
+		font-size: 16px;
+		line-height: 1.4;
 	}
 
 	.active.price__card {
-		padding: 36px 28px 48px 28px;
+		padding: 32px 24px 40px 24px;
 	}
 }
 
 .price__card-text {
 	padding-top: 33px;
-	padding-bottom: 50px;
+	padding-bottom: 44px;
 	color: #eb8382;
-	font-size: clamp(0.813rem, 0.699rem + 0.57vw, 1.125rem); // 18 - 13
+	font-size: clamp(0.875rem, 0.79rem + 0.43vw, 1.125rem); // 18 - 14
 	font-style: normal;
 	font-weight: 700;
-	line-height: 8px; /* 0% */
+	line-height: 1.2;
 
 	.dollar {
 		font-size: clamp(
@@ -158,6 +215,13 @@
 	z-index: 1;
 }
 
+/* Кнопка выбранной карточки показывает состояние, а не действие */
+.price__button--selected {
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.55);
+	cursor: default;
+}
+
 .active.price__card-title {
 	color: #fff;
 }
@@ -173,7 +237,21 @@
 	--gc-to: #826f8c;
 
 	position: relative;
+	/* Свой контекст наложения: без него декор union с z-index -1
+	   уезжает под фон карточки (у Standard его создаёт входная
+	   анимация, а у Basic и Premium нет) */
+	isolation: isolate;
 	padding: 51px 46px 65px 46px;
+
+	/* Цена на тёмном градиенте: цифра белая, подпись светло-коралловая,
+	   иначе главный элемент карточки не читается */
+	.price__card-text {
+		color: #ffd9d3;
+
+		.number {
+			color: #fff;
+		}
+	}
 }
 
 @media (max-width: 540px) {
@@ -184,7 +262,7 @@
 .active.price__card::after {
 	position: absolute;
 	content: '';
-	background: url(./../img/badge.png);
+	background: url(./../img/badge.svg);
 	background-size: cover;
 	width: 45px;
 	height: 45px;

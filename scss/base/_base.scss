@@ -7,10 +7,10 @@ body {
 	color: var(--text-color);
 	font-family: var(--font-main);
 
-	font-size: clamp(0.75rem, 0.614rem + 0.68vw, 1.125rem);
+	font-size: clamp(0.875rem, 0.739rem + 0.68vw, 1.125rem); // 18 - 14
 	font-style: normal;
 	font-weight: 500;
-	line-height: 29px;
+	line-height: 1.6;
 }
 
 body.no-scroll {
@@ -25,11 +25,7 @@ body.mobile-nav--open {
 	font-size: clamp(3.125rem, 2.716rem + 2.05vw, 4.25rem);
 	font-style: normal;
 	font-weight: 700;
-	line-height: 75px; /* 110.294% */
-
-	@media (max-width: 1150px) {
-		line-height: 60px;
-	}
+	line-height: 1.15;
 }
 
 .title-2 {

@@ -38,15 +38,8 @@
 		position: relative;
 	}
 
-	&-text::after {
-		position: absolute;
-		content: '';
-		background: url('./../img/arrow-left.svg');
-		width: 32.759px;
-		height: 18.931px;
-		bottom: 16px;
-		left: 82%;
-	}
+	/* Стрелка-декорация у текста убрана: висела в случайном месте
+	   и читалась как потерянный элемент слайдера */
 }
 
 .aboutPC__img {

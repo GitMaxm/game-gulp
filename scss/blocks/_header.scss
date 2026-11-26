@@ -111,7 +111,7 @@
 		font-size: clamp(2.5rem, 2.091rem + 2.05vw, 3.625rem);
 		font-style: normal;
 		font-weight: 700;
-		line-height: 75px;
+		line-height: 1.15;
 	}
 
 	&-text {
@@ -150,10 +150,21 @@
 		background-color: rgba(255, 255, 255, 0.4);
 		padding: 11px;
 
+		/* Одинаковая ширина обеих карточек: разнобой размеров
+		   бросается в глаза на фоне иллюстрации */
+		width: 235px;
+
 		display: flex;
 		align-items: center;
 		justify-content: space-evenly;
 		gap: 5px;
+
+		/* Миниатюры товаров: компактные, чтобы текст и рейтинг
+		   помещались в строку без переносов */
+		> img {
+			width: 60px;
+			height: auto;
+		}
 
 		@media (max-width: 500px) {
 			padding: 10px;
@@ -172,10 +183,6 @@
 		font-style: normal;
 		font-weight: 500;
 		line-height: 13px;
-
-		@media (max-width: 500px) {
-			font-size: 9px;
-		}
 	}
 
 	&-value {
@@ -184,27 +191,21 @@
 		font-style: normal;
 		font-weight: 700;
 		line-height: 12px;
-
-		@media (max-width: 500px) {
-			font-size: 9px;
-		}
 	}
 
 	&-grade {
 		display: flex;
+		flex-wrap: wrap;
+		row-gap: 2px;
 	}
 
 	&-review {
 		color: var(--accent);
-		font-size: 10px;
+		font-size: 11px;
 		font-style: normal;
 		font-weight: 500;
 		line-height: 13px;
 		padding-left: 5px;
-
-		@media (max-width: 500px) {
-			font-size: 9px;
-		}
 	}
 
 	&-star {
@@ -227,8 +228,6 @@
 	position: absolute;
 	bottom: -16px;
 	right: -125px;
-
-	width: 192px;
 
 	@media (max-width: 1280px) {
 		right: 440px;

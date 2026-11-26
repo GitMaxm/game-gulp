@@ -88,9 +88,9 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input:focus,
+input:focus:not(:focus-visible),
 input:active,
-button:focus,
+button:focus:not(:focus-visible),
 button:active {
   outline: none;
 }
@@ -112,7 +112,6 @@ legend {
   --container-width: 1200px;
   --container-padding: 15px;
   --font-main: 'Josefin Sans', sans-serif;
-  --font-accent: 'Playfair Display', serif;
   --page-bg: #ffe6d7;
   --text-color: #826f8c;
   --accent: #446381;
@@ -136,10 +135,10 @@ body {
   background-color: var(--page-bg);
   color: var(--text-color);
   font-family: var(--font-main);
-  font-size: clamp(0.75rem, 0.614rem + 0.68vw, 1.125rem);
+  font-size: clamp(0.875rem, 0.739rem + 0.68vw, 1.125rem);
   font-style: normal;
   font-weight: 500;
-  line-height: 29px;
+  line-height: 1.6;
 }
 
 body.no-scroll {
@@ -155,12 +154,7 @@ body.mobile-nav--open {
   font-size: clamp(3.125rem, 2.716rem + 2.05vw, 4.25rem);
   font-style: normal;
   font-weight: 700;
-  line-height: 75px; /* 110.294% */
-}
-@media (max-width: 1150px) {
-  .title-1 {
-    line-height: 60px;
-  }
+  line-height: 1.15;
 }
 
 .title-2 {
@@ -276,14 +270,9 @@ body.mobile-nav--open {
   padding-bottom: 30px;
   position: relative;
 }
-.aboutPC__content-text::after {
-  position: absolute;
-  content: "";
-  background: url("./../img/arrow-left.svg");
-  width: 32.759px;
-  height: 18.931px;
-  bottom: 16px;
-  left: 82%;
+.aboutPC__content {
+  /* Стрелка-декорация у текста убрана: висела в случайном месте
+     и читалась как потерянный элемент слайдера */
 }
 
 .aboutPC__img {
@@ -354,14 +343,9 @@ body.mobile-nav--open {
   padding-bottom: 30px;
   position: relative;
 }
-.aboutVR__content-text::after {
-  position: absolute;
-  content: "";
-  background: url("./../img/arrow-left.svg");
-  width: 32.759px;
-  height: 18.931px;
-  bottom: 7px;
-  left: 53%;
+.aboutVR__content {
+  /* Стрелка-декорация у текста убрана: висела в случайном месте
+     и читалась как потерянный элемент слайдера */
 }
 
 .aboutVR__content::after {
@@ -389,60 +373,6 @@ body.mobile-nav--open {
   transform: scale(0.97);
 }
 
-.header__description::after {
-  transform: translate(-50%, -50%) rotate(45deg); /* Здесь происходит начальное вращение */
-  animation: rotateAnimation 7s linear infinite; /* Добавляем анимацию вращения */
-}
-
-@keyframes rotateAnimation {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg); /* В начале анимации угол вращения 0 градусов */
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg); /* В конце анимации угол вращения 360 градусов */
-  }
-}
-.header::before {
-  animation: pulsate-bck 1.2s cubic-bezier(0.47, 0, 0.745, 0.715) infinite alternate-reverse forwards;
-}
-@keyframes pulsate-bck {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-.header__content::after {
-  animation: vibrate-1 2s linear infinite both;
-}
-
-.aboutPC__img::after {
-  animation: vibrate-1 2s linear infinite both;
-}
-@keyframes vibrate-1 {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
 .position-vr {
   animation: bounce-in-top 1.31s both;
 }
@@ -566,8 +496,123 @@ body.mobile-nav--open {
     margin-inline: auto;
   }
 }
+.booking {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.booking__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 76px;
+  align-items: start;
+}
+@media (max-width: 990px) {
+  .booking__wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.booking__title {
+  padding: 16px 0 24px 0;
+}
+
+.booking__text {
+  max-width: 420px;
+}
+
+.booking__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 28px;
+}
+
+.booking__contact {
+  font-weight: 700;
+  color: var(--accent);
+}
+.booking__contact a {
+  color: inherit;
+  transition: color 150ms ease;
+}
+.booking__contact a:hover {
+  color: #eb8382;
+}
+
+.booking__panel {
+  background: #fff;
+  border: 1px solid rgba(68, 99, 129, 0.14);
+  border-radius: 20px;
+  box-shadow: 0px 20px 50px 0px rgba(132, 148, 205, 0.08);
+  padding: 40px;
+  width: 100%;
+  max-width: 520px;
+}
+@media (max-width: 540px) {
+  .booking__panel {
+    padding: 28px 24px;
+  }
+}
+
+.booking__plan {
+  color: var(--accent);
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+.booking__plan span {
+  color: #eb8382;
+}
+
+.booking__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.booking__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.booking__field span {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+}
+.booking__field input {
+  border: 1px solid rgba(68, 99, 129, 0.25);
+  border-radius: 10px;
+  background: #fff;
+  padding: 12px 16px;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 16px; /* 16px и больше: iOS не зумит поле при фокусе */
+  font-weight: 500;
+}
+.booking__field input:focus {
+  border-color: #4499d9;
+  outline: none;
+}
+
+.booking__note {
+  color: var(--text-color);
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.booking__success {
+  background: rgba(68, 153, 217, 0.12);
+  border: 1px solid rgba(68, 153, 217, 0.4);
+  border-radius: 10px;
+  padding: 16px 20px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .footer {
-  border: 1.5px solid var(--text-color);
+  border-top: 1px solid rgba(68, 99, 129, 0.14);
   padding-top: 25px;
   padding-bottom: 19px;
 }
@@ -718,7 +763,7 @@ body.mobile-nav--open {
   font-size: clamp(2.5rem, 2.091rem + 2.05vw, 3.625rem);
   font-style: normal;
   font-weight: 700;
-  line-height: 75px;
+  line-height: 1.15;
 }
 .header__description-text {
   padding: 31px 0 36px 0;
@@ -754,10 +799,19 @@ body.mobile-nav--open {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.4);
   padding: 11px;
+  /* Одинаковая ширина обеих карточек: разнобой размеров
+     бросается в глаза на фоне иллюстрации */
+  width: 235px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   gap: 5px;
+  /* Миниатюры товаров: компактные, чтобы текст и рейтинг
+     помещались в строку без переносов */
+}
+.header__decor-comment > img {
+  width: 60px;
+  height: auto;
 }
 @media (max-width: 500px) {
   .header__decor-comment {
@@ -776,11 +830,6 @@ body.mobile-nav--open {
   font-weight: 500;
   line-height: 13px;
 }
-@media (max-width: 500px) {
-  .header__decor-text {
-    font-size: 9px;
-  }
-}
 .header__decor-value {
   color: #eb8382;
   font-size: 11px;
@@ -788,26 +837,18 @@ body.mobile-nav--open {
   font-weight: 700;
   line-height: 12px;
 }
-@media (max-width: 500px) {
-  .header__decor-value {
-    font-size: 9px;
-  }
-}
 .header__decor-grade {
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 2px;
 }
 .header__decor-review {
   color: var(--accent);
-  font-size: 10px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: 13px;
   padding-left: 5px;
-}
-@media (max-width: 500px) {
-  .header__decor-review {
-    font-size: 9px;
-  }
 }
 .header__decor-star {
   display: flex;
@@ -829,7 +870,6 @@ body.mobile-nav--open {
   position: absolute;
   bottom: -16px;
   right: -125px;
-  width: 192px;
 }
 @media (max-width: 1280px) {
   .position-controller {
@@ -879,6 +919,9 @@ body.mobile-nav--open {
   width: 100%;
   height: 100%;
   z-index: 99;
+  /* Скрытое меню недоступно для Tab, пока анимация закрытия
+     играет, visibility переключается с задержкой */
+  visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -886,12 +929,15 @@ body.mobile-nav--open {
   padding-top: 40px;
   padding-bottom: 40px;
   background: var(--page-bg);
-  transition: top 0.25s var(--ease-drawer);
+  transition: top 0.25s var(--ease-drawer), visibility 0s 0.25s;
   overflow-y: auto;
 }
 
 .mobile-nav--open {
   top: 0;
+  visibility: visible;
+  transition: top 0.25s var(--ease-drawer), visibility 0s 0s;
+  box-shadow: 0 20px 60px rgba(68, 99, 129, 0.25);
 }
 
 .mobile-nav a {
@@ -1197,7 +1243,7 @@ body.mobile-nav--open {
      иначе главный элемент карточки не читается */
 }
 .active.price__card .price__card-text {
-  color: #ffd9d3;
+  color: #ffe9e5;
 }
 .active.price__card .price__card-text .number {
   color: #fff;

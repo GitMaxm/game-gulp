@@ -6,6 +6,10 @@
 	height: 100%;
 	z-index: 99;
 
+	/* Скрытое меню недоступно для Tab, пока анимация закрытия
+	   играет, visibility переключается с задержкой */
+	visibility: hidden;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -14,13 +18,20 @@
 	padding-bottom: 40px;
 	// background: linear-gradient(209deg, #4287b3 -17.38%, #133f6b 78.4%), #276195;
 	background: var(--page-bg);
-	transition: top 0.25s var(--ease-drawer);
+	transition:
+		top 0.25s var(--ease-drawer),
+		visibility 0s 0.25s;
 
 	overflow-y: auto;
 }
 
 .mobile-nav--open {
 	top: 0;
+	visibility: visible;
+	transition:
+		top 0.25s var(--ease-drawer),
+		visibility 0s 0s;
+	box-shadow: 0 20px 60px rgba(68, 99, 129, 0.25);
 }
 
 .mobile-nav a {

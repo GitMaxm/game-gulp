@@ -52,15 +52,8 @@
 		position: relative;
 	}
 
-	&-text::after {
-		position: absolute;
-		content: '';
-		background: url('./../img/arrow-left.svg');
-		width: 32.759px;
-		height: 18.931px;
-		bottom: 7px;
-		left: 53%;
-	}
+	/* Стрелка-декорация у текста убрана: висела в случайном месте
+	   и читалась как потерянный элемент слайдера */
 }
 
 .aboutVR__content::after {

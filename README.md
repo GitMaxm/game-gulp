@@ -4,7 +4,11 @@
 
 ## Стек
 
-HTML5, SCSS (dart-sass), Gulp 5, Autoprefixer, Swiper 10.
+HTML5, SCSS (dart-sass), Gulp 5, Autoprefixer.
+
+## Библиотеки
+
+Swiper 10
 
 ## Запуск
 
